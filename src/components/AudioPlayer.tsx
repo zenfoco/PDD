@@ -39,68 +39,71 @@ export default function AudioPlayer() {
     };
 
     return (
-        <div className={`fixed bottom-4 right-4 z-50 transition-all duration-500 ease-in-out ${isOpen ? "w-80" : "w-16 h-16"}`}>
-            <div
-                className="bg-black/40 backdrop-blur-xl border border-red-900/50 shadow-[#e81919]/20 shadow-xl overflow-hidden rounded-2xl flex flex-col"
-            >
-                {!isOpen ? (
-                    <button
-                        onClick={() => setIsOpen(true)}
-                        className="w-full h-full flex items-center justify-center p-4 hover:bg-white/5 transition-colors group"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#e81919] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                        </svg>
-                    </button>
-                ) : (
-                    <div className="p-4 flex flex-col gap-4">
-                        <div className="flex justify-between items-center">
-                            <h4 className="text-[#e81919] font-bold uppercase tracking-wider text-sm flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-[#e81919] animate-pulse"></span>
-                                Rádio PDD
-                            </h4>
-                            <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
+        <div className="fixed bottom-0 left-0 w-full z-50">
+            <div className="bg-black/70 backdrop-blur-2xl border-t border-[#e81919]/30 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] h-20 md:h-24 px-4 md:px-8 flex items-center justify-between w-full">
 
-                        <div className="text-white font-medium text-lg truncate">
-                            {tracks[currentTrackIndex].title}
-                        </div>
-
-                        <div className="flex items-center justify-center gap-6">
-                            <button onClick={prevTrack} className="text-gray-300 hover:text-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
-                                </svg>
-                            </button>
-
-                            <button
-                                onClick={togglePlay}
-                                className="bg-[#e81919] text-white rounded-full p-4 hover:scale-105 active:scale-95 transition-all shadow-[0_0_15px_rgba(232,25,25,0.5)]"
-                            >
-                                {isPlaying ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 translate-x-1" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z" />
-                                    </svg>
-                                )}
-                            </button>
-
-                            <button onClick={nextTrack} className="text-gray-300 hover:text-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
-                                </svg>
-                            </button>
-                        </div>
+                {/* Lateral Esquerda: Logo Rádio */}
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="relative flex items-center justify-center">
+                        <span className="absolute w-3 h-3 rounded-full bg-[#e81919] animate-ping opacity-75"></span>
+                        <span className="relative w-2 h-2 rounded-full bg-[#e81919]"></span>
                     </div>
-                )}
+                    <h4 className="text-[#e81919] font-bold uppercase tracking-widest text-xs md:text-sm hidden sm:block truncate font-[family-name:var(--font-cinzel)]">
+                        Rádio PDD
+                    </h4>
+                </div>
+
+                {/* Centro: Controles de Áudio */}
+                <div className="flex flex-col items-center justify-center flex-[2] min-w-[200px] drop-shadow-md">
+                    <div className="flex items-center gap-6 md:gap-8 mb-1">
+                        <button
+                            onClick={prevTrack}
+                            className="text-gray-400 hover:text-white hover:scale-110 active:scale-95 transition-all"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-8 md:w-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+                            </svg>
+                        </button>
+
+                        <button
+                            onClick={togglePlay}
+                            className="text-white hover:text-[#e81919] hover:scale-110 active:scale-95 transition-all drop-shadow-[0_0_15px_rgba(232,25,25,0.4)]"
+                        >
+                            {isPlaying ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 md:h-12 md:w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 md:h-12 md:w-12" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            )}
+                        </button>
+
+                        <button
+                            onClick={nextTrack}
+                            className="text-gray-400 hover:text-white hover:scale-110 active:scale-95 transition-all"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-8 md:w-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Faixa atual */}
+                    <div className="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest truncate max-w-full px-4 text-center">
+                        {tracks[currentTrackIndex].title}
+                    </div>
+                </div>
+
+                {/* Lateral Direita: Espaçador/Ícone genérico para equilibrar o Flexbox */}
+                <div className="flex-1 min-w-0 flex justify-end hidden sm:flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                    </svg>
+                </div>
             </div>
+
             <audio
                 ref={audioRef}
                 src={tracks[currentTrackIndex].src}

@@ -8,7 +8,7 @@ export default function Home() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   return (
-    <main className="min-h-screen bg-black text-white relative flex flex-col items-center overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white relative flex flex-col items-center overflow-x-hidden pb-24 md:pb-28">
       {/* Background YouTube Video - Fixed globally, original zoom scale */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-black flex items-center justify-center">
         <iframe

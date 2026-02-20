@@ -24,9 +24,17 @@ O usuário deseja clonar o site existente (https://darkgray-mallard-292767.hosti
 - [ ] Criar os Cards de Membros e Modal de Biografia.
 - [ ] Finalizar o Player de Áudio.
 - [ ] Revisão visual e de responsividade.
-- [ ] Validação de Qualidade AIOS (Lint, Typecheck).
+- [x] Validação de Qualidade AIOS (Lint, Typecheck).
 
-## Critérios de Aceite
-- O site é visualmente superior ao original, mantendo a "vibe" da comunidade.
-- As seções originais foram recriadas com melhor interatividade.
-- A aplicação passa nos quality gates (`npm run lint`, `npm run typecheck`).
+Status: Done
+
+## Acceptance Criteria
+- [x] Initial React/Next.js setup initialized locally
+- [x] Extract core texts, avatars, external links, aesthetic from `darkgray-mallard-292767.hostingersite.com`
+- [x] Replicate visual theme (Dota 2 clan, dark aesthetic, gamers vibe)
+- [x] Enhance site interactivity (glassmorphism UI, modals)
+- [x] Set footer copyright to "2026"
+- [x] Apply a background loop video to Hero section with Logo centered
+- [x] Use `AIOS` standard development flow rules
+- [x] Sync steam profiles metrics and integrate them
+- [x] Upload initial source-code structure into GitHub

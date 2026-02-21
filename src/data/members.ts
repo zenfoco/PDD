@@ -67,14 +67,14 @@ export const members: Member[] = [
     name: "L. é. o. 亗",
     avatar: "https://avatars.fastly.steamstatic.com/aef94c58797061ae1336a2aa4822531b3f18dd04_full.jpg",
     steamUrl: "https://steamcommunity.com/profiles/76561198973941713",
-    bio: "Mago do iphone: É o mininu do Mostro da Jaula, puxou todas as habilidades do pai, joga muito de invoker também.",
+    bio: "Mago do iPhone e irmão do Marvin. Assumindo a glória da família, é o mininu e aprendiz do Monstro da Jaula, puxando todas as habilidades afiadas do pai nas ranqueadas. O maluco é simplesmente brabo de Invoker e não pensa duas vezes antes de cravar um 15/0 fácil dominando de Rubick no controle do jogo.",
     dotaHours: "6.674"
   },
   {
     name: "Dr_Sputnik",
     avatar: "https://avatars.fastly.steamstatic.com/8f72cde6a930f339c298c888e8d2bf8c31c22a95_full.jpg",
     steamUrl: "https://steamcommunity.com/profiles/76561198006837850/",
-    bio: "O Bio-Hacker Oficial do Clã PDD. Marcel (Guazzelli) é o cientista da Divisão Mogi das Cruzes. Mestre da Biorressonância e especialista em 'Azul de Metileno', ele otimiza suas mitocôndrias com luz vermelha só para ter o reflexo perfeito na hora de 'tornear a peça' no Dota.",
+    bio: "O Bio-Hacker Oficial do Clã PDD. Marcel é o cientista da Divisão Mogi das Cruzes. Mestre da Biorressonância e especialista em 'Azul de Metileno', ele otimiza suas mitocôndrias com luz vermelha só para ter o reflexo perfeito na hora de 'tornear a peça' no Dota.",
     dotaHours: "3.216"
   }
 ];

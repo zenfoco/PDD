@@ -74,7 +74,7 @@ export const members: Member[] = [
     name: "Dr_Sputnik",
     avatar: "https://avatars.fastly.steamstatic.com/8f72cde6a930f339c298c888e8d2bf8c31c22a95_full.jpg",
     steamUrl: "https://steamcommunity.com/profiles/76561198006837850/",
-    bio: "O Bio-Hacker Oficial do Clã PDD. Marcel é o cientista da Divisão Mogi das Cruzes. Mestre da Biorressonância e especialista em 'Azul de Metileno', ele otimiza suas mitocôndrias com luz vermelha só para ter o reflexo perfeito na hora de 'tornear a peça' no Dota. Um aviso de sobrevivência aos oponentes: rezem para não encará-lo com seu aterrorizante Undying ou seu colossal Dragon Knight... Ah, e ele adora fazer um 'troca-troca' macabro jogando de Venge, sem falar no seu Warlock, mundialmente reconhecido como o grande 'arador de terra usando as bolas'!",
+    bio: "O Bio-Hacker Oficial do Clã PDD. Marcel é o cientista da Divisão Mogi das Cruzes. Mestre da Biorressonância e especialista em 'Azul de Metileno', ele otimiza suas mitocôndrias com luz vermelha só para ter o reflexo perfeito na hora de 'tornear a peça' no Dota. Um aviso de sobrevivência aos oponentes: rezem para não encará-lo com seu aterrorizante Undying ou seu colossal Dragon Knight... Ah, e ele adora fazer um 'troca-troca' jogando de Venge, sem falar no seu Warlock, mundialmente reconhecido como o grande 'arador de terra usando as bolas'!",
     dotaHours: "3.216"
   }
 ];

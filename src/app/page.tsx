@@ -163,11 +163,8 @@ export default function Home() {
                     href={selectedMember.steamUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 bg-white text-black font-extrabold py-4 px-8 uppercase rounded-lg hover:bg-gray-200 hover:scale-105 transition-all w-full md:w-auto justify-center"
+                    className="inline-flex items-center justify-center bg-transparent border-2 border-[#e81919] text-[#e81919] font-black uppercase tracking-[0.2em] py-4 px-12 hover:bg-[#e81919] hover:text-white hover:scale-105 transition-all duration-300 w-full md:w-auto rounded-xl shadow-[0_0_15px_rgba(232,25,25,0.1)] hover:shadow-[0_0_30px_rgba(232,25,25,0.4)]"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" className="h-6 w-6 fill-current">
-                      <path d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 16.7-64.5 92.6 14.5 131.5-62.8 131.5-62.8 5.1-4.2 13.4-14.3 15.5-22.7 7.2-29.2-22-35-22-35-86.2-42.2-122-106.1-122-106.1-10.9-18.4-36.4-17.6-36.4-17.6-1.5 0-41.5 29-53 82.5-3.3 15.6-2.9 31.5-2.9 31.5-22.5 17.5-68.5 26.5-68.5 26.5-51 14.5-59 74-59 74-2 16.5 9 37.5 9 37.5 45.4 34.2 92.2 46.4 125 43.5 25.1-2.3 47.9-10.3 64-21 17.7 7.2 38.6 11.2 60.5 11.2 96.3 0 174.4-78.1 174.4-174.4S352.3 81.6 256 81.6c-94 0-170.8 74.3-174.3 167.3-3.6-7.7-6.2-15.8-7.7-24.3C52.2 161 0 256 0 256c0 137 111 248 248 248zM277.5 178c5 0 8.5 3.5 8.5 8.5s-3.5 8.5-8.5 8.5-8.5-3.5-8.5-8.5 3.5-8.5 8.5-8.5zm-59.5 0c5 0 8.5 3.5 8.5 8.5s-3.5 8.5-8.5 8.5-8.5-3.5-8.5-8.5 3.5-8.5 8.5-8.5zm27 75.5c-35 0-63.5-28.5-63.5-63.5S210 126.5 245 126.5s63.5 28.5 63.5 63.5-28.5 63.5-63.5 63.5zm0-108c-24.5 0-44.5 20-44.5 44.5s20 44.5 44.5 44.5 44.5-20 44.5-44.5-20-44.5-44.5-44.5z" />
-                    </svg>
                     Acessar Perfil Steam
                   </a>
                 </div>

@@ -40,7 +40,7 @@ export default function LoreSection() {
             {/* Origem do Nome */}
             <div className="text-center w-full max-w-4xl mx-auto space-y-8">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase font-[family-name:var(--font-cinzel)] text-transparent bg-clip-text bg-gradient-to-r from-[#e81919] via-red-500 to-orange-500 drop-shadow-[0_0_15px_rgba(232,25,25,0.4)]">
-                    As Crônicas do Clã
+                    Só macho que faz isso
                 </h2>
 
                 <p className="text-gray-300 text-lg md:text-xl leading-relaxed">

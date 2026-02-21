@@ -113,7 +113,7 @@ export default function AudioPlayer() {
 
                     {/* Faixa atual */}
                     <div className="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest truncate max-w-[200px] sm:max-w-full px-2 text-center">
-                        {tracks[currentTrackIndex].title}
+                        Jogando e Levando Rola
                     </div>
                 </div>
 

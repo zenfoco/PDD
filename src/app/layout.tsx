@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { Cinzel_Decorative } from 'next/font/google';
+import { Orbitron } from 'next/font/google';
 import './globals.css';
 
-const cinzel = Cinzel_Decorative({
+const orbitron = Orbitron({
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
-  variable: '--font-cinzel',
+  weight: ['400', '600', '700', '900'],
+  variable: '--font-cinzel', // Mantendo o CSS var antigo para auto-aplicar globalmente
 });
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`scroll-smooth ${cinzel.variable}`}>
+    <html lang="pt-BR" className={`scroll-smooth ${orbitron.variable}`}>
       <body className="antialiased font-sans bg-black text-white" suppressHydrationWarning>
         {children}
       </body>

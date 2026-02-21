@@ -1,8 +1,9 @@
 "use client";
-
+import Image from "next/image";
 import { useState } from "react";
-import { members, Member } from "@/data/members";
-import AudioPlayer from "@/components/AudioPlayer";
+import { members, Member } from "../data/members";
+import AudioPlayer from '../components/AudioPlayer';
+import LoreSection from '../components/LoreSection';
 
 export default function Home() {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
@@ -100,10 +101,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Empty Space Section */}
-      <section className="relative z-10 w-full h-[30vh] flex items-center justify-center">
-        <div className="opacity-10 pointer-events-none">
-          <div className="w-[1px] h-32 bg-gradient-to-b from-[#e81919] to-transparent mx-auto"></div>
+      {/* Empty Space & Lore Divider */}
+      <section className="relative z-10 w-full h-[15vh] flex items-center justify-center mt-12">
+        <div className="opacity-30 pointer-events-none">
+          <div className="w-[2px] h-32 bg-gradient-to-b from-[#e81919] to-transparent mx-auto"></div>
+        </div>
+      </section>
+
+      <LoreSection />
+
+      <section className="relative z-10 w-full h-[15vh] flex items-center justify-center mb-12">
+        <div className="opacity-20 pointer-events-none">
+          <div className="w-[2px] h-32 bg-gradient-to-b from-transparent to-[#e81919] mx-auto"></div>
         </div>
       </section>
 

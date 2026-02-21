@@ -16,6 +16,28 @@ export default function AudioPlayer() {
     const [isOpen, setIsOpen] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
+    // Tentar tocar automaticamente ao abrir a página
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.play().then(() => {
+                setIsPlaying(true);
+            }).catch((err) => {
+                console.warn("Autoplay bloqueado pelo navegador. Iniciando na primeira interação.");
+                // TRUQUE: Como o navegador bloqueia o auto-play sem interação,
+                // vamos escutar o primeiro click que o usuário der EM QUALQUER LUGAR da tela
+                // para dar play na música silenciosamente e remover o listener.
+                const playOnInteraction = () => {
+                    if (audioRef.current) {
+                        audioRef.current.play();
+                        setIsPlaying(true);
+                        document.removeEventListener("click", playOnInteraction);
+                    }
+                };
+                document.addEventListener("click", playOnInteraction);
+            });
+        }
+    }, []);
+
     useEffect(() => {
         if (audioRef.current) {
             if (isPlaying) {
@@ -43,7 +65,7 @@ export default function AudioPlayer() {
             <div className="bg-black/70 backdrop-blur-2xl border-t border-[#e81919]/30 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] h-20 md:h-24 px-4 md:px-8 flex items-center justify-between w-full">
 
                 {/* Lateral Esquerda: Logo Rádio */}
-                <div className="flex items-center gap-3 flex-1 min-w-0">
+                <div className="flex items-center gap-3 flex-1 min-w-[40px] md:min-w-0">
                     <div className="relative flex items-center justify-center">
                         <span className="absolute w-3 h-3 rounded-full bg-[#e81919] animate-ping opacity-75"></span>
                         <span className="relative w-2 h-2 rounded-full bg-[#e81919]"></span>
@@ -54,7 +76,7 @@ export default function AudioPlayer() {
                 </div>
 
                 {/* Centro: Controles de Áudio */}
-                <div className="flex flex-col items-center justify-center flex-[2] min-w-[200px] drop-shadow-md">
+                <div className="flex flex-col items-center justify-center w-auto shrink-0 drop-shadow-md">
                     <div className="flex items-center gap-6 md:gap-8 mb-1">
                         <button
                             onClick={prevTrack}
@@ -91,14 +113,14 @@ export default function AudioPlayer() {
                     </div>
 
                     {/* Faixa atual */}
-                    <div className="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest truncate max-w-full px-4 text-center">
+                    <div className="text-[10px] md:text-xs text-gray-300 uppercase tracking-widest truncate max-w-[200px] sm:max-w-full px-2 text-center">
                         {tracks[currentTrackIndex].title}
                     </div>
                 </div>
 
-                {/* Lateral Direita: Espaçador/Ícone genérico para equilibrar o Flexbox */}
-                <div className="flex-1 min-w-0 flex justify-end hidden sm:flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* Lateral Direita: Espaçador para manter o Flexbox perfeitamente centralizado no Mobile */}
+                <div className="flex-1 flex justify-end items-center gap-2 min-w-[40px] md:min-w-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600 hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
                     </svg>
                 </div>

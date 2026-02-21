@@ -53,7 +53,7 @@ export const members: Member[] = [
     name: "Te a Rombo",
     avatar: "https://avatars.fastly.steamstatic.com/91fcb61bf6e81242df12e0165b81216f33a9baa1_full.jpg",
     steamUrl: "https://steamcommunity.com/profiles/76561199086804148/",
-    bio: "O talentoso Jeffrey carrega a Divisão Recife no sangue e o teimoso Wraith King no coração! Sendo o primo do Monstro da Jaula e acreditando ser divinamente imortal, ele corajosamente avança 1 contra 5 nas ranqueadas sem temer nada e nem ninguém. Após ser dizimado na lane, ele anuncia orgulhosamente no chat: “Foi quase, eu levei dois!”, embora na realidade tenha levado apenas tapas. Teimoso na build, não escuta o primo, pega pilha fácil com as histórias de Rola de Libra, adora ver a Jaula se lascando e vive reclamando que Coringa só quer jogar na mesma lane pra sugar sua aura.",
+    bio: "O talentoso Jeffrey carrega a Divisão Recife no sangue e o teimoso Wraith King no coração! Sendo o primo do Monstro da Jaula e acreditando ser divinamente imortal, ele corajosamente avança 1 contra 5 no Turbo sem temer nada e nem ninguém. Após ser dizimado na lane, ele anuncia orgulhosamente no chat: “Foi quase, eu levei dois!”, embora na realidade tenha levado apenas tapas. Teimoso na build, não escuta o primo, pega pilha fácil com as histórias de Rola de Libra, adora ver a Jaula se lascando e vive reclamando que Coringa só quer jogar na mesma lane pra sugar sua aura.",
     dotaHours: "5.897",
   },
   {

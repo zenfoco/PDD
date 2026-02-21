@@ -67,7 +67,7 @@ export const members: Member[] = [
     name: "L. é. o. 亗",
     avatar: "https://avatars.fastly.steamstatic.com/aef94c58797061ae1336a2aa4822531b3f18dd04_full.jpg",
     steamUrl: "https://steamcommunity.com/profiles/76561198973941713",
-    bio: "Mago do iPhone e irmão do Marvin. Assumindo a glória da família, é o mininu e aprendiz do Monstro da Jaula, puxando todas as habilidades afiadas do pai nas ranqueadas. O maluco é simplesmente brabo de Invoker e não pensa duas vezes antes de cravar um 15/0 fácil dominando de Rubick no controle do jogo.",
+    bio: "Mago do iPhone e irmão do Marvin. Assumindo a glória da família, é o mininu e aprendiz do Monstro da Jaula, puxando todas as habilidades afiadas do pai. O maluco é simplesmente brabo de Invoker e não pensa duas vezes antes de cravar um 15/0 fácil dominando de Rubick no controle do jogo.",
     dotaHours: "6.674"
   },
   {

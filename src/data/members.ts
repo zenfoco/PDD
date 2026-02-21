@@ -19,7 +19,7 @@ export const members: Member[] = [
     avatar: "https://avatars.fastly.steamstatic.com/62883f6c901ca3a77662b1a13fe43c29a958404a_full.jpg",
     steamUrl: "https://steamcommunity.com/id/milagre144/",
     bio: "O Discípulo de 18 Mil Horas Sem Bota. Representando SC, Kaian simplesmente ignora os apelos de “Porra, Kaiaaa, bota a bota no boneco!” com um sorriso. Este “macho peludo” bonzinho e místico, que sai para 'tornear a peça' na madrugada, é o criador dos áudios duvidosos do clã e joga de Chen, Warlock e Zumbi. Descrito como “inteligente demais” (o que é uma mentira), tem surtos de burrice relâmpago. Apesar de tudo, é o fiel escudeiro do Jaula, claro, desde que não tente inventar uma build russa.",
-    dotaHours: "13.995",
+    dotaHours: "6.671",
   },
   {
     name: "JogoMalReborn",

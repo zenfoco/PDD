@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><profile>
+	<steamID64>76561198006837850</steamID64>
+	<steamID><![CDATA[Dr_Sputnik]]></steamID>
+	<onlineState>offline</onlineState>
+	<stateMessage><![CDATA[Offline]]></stateMessage>
+	<privacyState>public</privacyState>
+	<visibilityState>3</visibilityState>
+	<avatarIcon><![CDATA[https://avatars.fastly.steamstatic.com/8f72cde6a930f339c298c888e8d2bf8c31c22a95.jpg]]></avatarIcon>
+	<avatarMedium><![CDATA[https://avatars.fastly.steamstatic.com/8f72cde6a930f339c298c888e8d2bf8c31c22a95_medium.jpg]]></avatarMedium>
+	<avatarFull><![CDATA[https://avatars.fastly.steamstatic.com/8f72cde6a930f339c298c888e8d2bf8c31c22a95_full.jpg]]></avatarFull>
+	<vacBanned>0</vacBanned>
+	<tradeBanState>None</tradeBanState>
+	<isLimitedAccount>0</isLimitedAccount>
+	<customURL><![CDATA[]]></customURL>
+	<memberSince>February 23, 2009</memberSince>
+	<steamRating></steamRating>
+	<hoursPlayed2Wk>0.0</hoursPlayed2Wk>
+	<headline><![CDATA[]]></headline>
+	<location><![CDATA[Moji Das Cruzes, Sao Paulo, Brazil]]></location>
+	<realname><![CDATA[Dr_Sputnik]]></realname>
+	<summary><![CDATA[]]></summary>
+
+
+	<groups>
+		<group isPrimary="1">
+			<groupID64>103582791433386305</groupID64>
+			<groupName><![CDATA[RealmsBR]]></groupName>
+			<groupURL><![CDATA[realmsbr]]></groupURL>
+			<headline><![CDATA[Canal RealmsBR agora no Steam]]></headline>
+			<summary><![CDATA[Este grupo foi criado para reunir inscritos no canal do YouTube RealmsBR e fazer promoções em que os inscritos podem ganhar jogos e participar de vídeos do canal.<br><br><a class="bb_link" href="http://www.youtube.com/user/RealmsBR" target="_blank" rel="" >Canal RealmsBR</a><br><a class="bb_link" href="https://steamcommunity.com/linkfilter/?u=http%3A%2F%2Frealmsbr.blogspot.com.br%2F" target="_blank" rel=" noopener" >Blog RealmsBR</a><span class="bb_link_host">[realmsbr.blogspot.com.br]</span>]]></summary>
+			<avatarIcon><![CDATA[https://avatars.fastly.steamstatic.com/af8437ea1f041b630c6c1e672495ad3b11ac9083.jpg]]></avatarIcon>
+			<avatarMedium><![CDATA[https://avatars.fastly.steamstatic.com/af8437ea1f041b630c6c1e672495ad3b11ac9083_medium.jpg]]></avatarMedium>
+			<avatarFull><![CDATA[https://avatars.fastly.steamstatic.com/af8437ea1f041b630c6c1e672495ad3b11ac9083_full.jpg]]></avatarFull>
+			<memberCount>21</memberCount>
+			<membersInChat>0</membersInChat>
+			<membersInGame>0</membersInGame>
+			<membersOnline>3</membersOnline>
+		</group>
+		<group isPrimary="0">
+			<groupID64>103582791430659825</groupID64>
+			<groupName><![CDATA[Company of Heroes - Brasil]]></groupName>
+			<groupURL><![CDATA[companybr]]></groupURL>
+			<headline><![CDATA[]]></headline>
+			<summary><![CDATA[No information given.]]></summary>
+			<avatarIcon><![CDATA[https://avatars.fastly.steamstatic.com/9f03034053a6147a5ce66f1b0a52b2b175907914.jpg]]></avatarIcon>
+			<avatarMedium><![CDATA[https://avatars.fastly.steamstatic.com/9f03034053a6147a5ce66f1b0a52b2b175907914_medium.jpg]]></avatarMedium>
+			<avatarFull><![CDATA[https://avatars.fastly.steamstatic.com/9f03034053a6147a5ce66f1b0a52b2b175907914_full.jpg]]></avatarFull>
+			<memberCount>366</memberCount>
+			<membersInChat>33</membersInChat>
+			<membersInGame>4</membersInGame>
+			<membersOnline>41</membersOnline>
+		</group>
+		<group isPrimary="0">
+			<groupID64>103582791431949543</groupID64>
+			<groupName><![CDATA[2K]]></groupName>
+			<groupURL><![CDATA[2k]]></groupURL>
+			<headline><![CDATA[]]></headline>
+			<summary><![CDATA[No information given.]]></summary>
+			<avatarIcon><![CDATA[https://avatars.fastly.steamstatic.com/53b80fbb1f3c5e6833a5587177ee4bdbe8f52030.jpg]]></avatarIcon>
+			<avatarMedium><![CDATA[https://avatars.fastly.steamstatic.com/53b80fbb1f3c5e6833a5587177ee4bdbe8f52030_medium.jpg]]></avatarMedium>
+			<avatarFull><![CDATA[https://avatars.fastly.steamstatic.com/53b80fbb1f3c5e6833a5587177ee4bdbe8f52030_full.jpg]]></avatarFull>
+			<memberCount>169624</memberCount>
+			<membersInChat>2257</membersInChat>
+			<membersInGame>2440</membersInGame>
+			<membersOnline>26964</membersOnline>
+		</group>
+			<group isPrimary="0">
+				<groupID64>103582791432010320</groupID64>
+			</group>
+					<group isPrimary="0">
+				<groupID64>103582791433565228</groupID64>
+			</group>
+					<group isPrimary="0">
+				<groupID64>103582791434218656</groupID64>
+			</group>
+					<group isPrimary="0">
+				<groupID64>103582791435710998</groupID64>
+			</group>
+			</groups>
+</profile>

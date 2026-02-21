@@ -13,7 +13,6 @@ const tracks = [
 export default function AudioPlayer() {
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     // Tentar tocar automaticamente ao abrir a página
@@ -21,7 +20,7 @@ export default function AudioPlayer() {
         if (audioRef.current) {
             audioRef.current.play().then(() => {
                 setIsPlaying(true);
-            }).catch((err) => {
+            }).catch(() => {
                 console.warn("Autoplay bloqueado pelo navegador. Iniciando na primeira interação.");
                 // TRUQUE: Como o navegador bloqueia o auto-play sem interação,
                 // vamos escutar o primeiro click que o usuário der EM QUALQUER LUGAR da tela

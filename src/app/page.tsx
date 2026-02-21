@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import { members, Member } from "../data/members";
 import AudioPlayer from '../components/AudioPlayer';

@@ -76,5 +76,12 @@ export const members: Member[] = [
     steamUrl: "https://steamcommunity.com/profiles/76561198006837850/",
     bio: "O Bio-Hacker Oficial do Clã PDD. Marcel é o cientista da Divisão Mogi das Cruzes. Mestre da Biorressonância e especialista em 'Azul de Metileno', ele otimiza suas mitocôndrias com luz vermelha só para ter o reflexo perfeito na hora de 'tornear a peça' no Dota. Quando joga de Zumbi (Undying) e quebra o limite de seu poder, ele se torna o CAPITÃO FODA-SE, matando os oponentes apenas com a força do desprezo. Tem também seu famoso Warlock, mais conhecido como grande 'arador de terras com as bola'.",
     dotaHours: "3.216"
+  },
+  {
+    name: "Tomate Cru",
+    avatar: "https://avatars.akamai.steamstatic.com/f907b7b8849d4048fb0df6184f993f9043a60254_full.jpg",
+    steamUrl: "https://steamcommunity.com/id/gustamengogu/",
+    bio: "Direto do Rio de Janeiro, Gustavo é a Wikipédia humana do Dota: sabe tudo sobre cada herói, cada item, cada patch e cada meta — mas só usa esse conhecimento para jogar de suporte. Pergunta qualquer coisa sobre o jogo e ele responde antes do Google. No meio da explicação, porém, inevitavelmente vem o clássico: \"Peraí, meu PC travou\". E trava mesmo. Sempre. Na teamfight mais importante, no momento decisivo, o Tomate Cru some da tela enquanto o time chora. A lenda diz que comer um tomate com sal virou o rito de passagem do clã — \"Humm... AaAaAArGH!! AaAaAArGH!!\" — mas até hoje ninguém sabe se o grito foi do tomate ou do PC travando de novo.",
+    dotaHours: "15.467",
   }
 ];

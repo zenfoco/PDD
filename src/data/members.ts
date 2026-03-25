@@ -83,5 +83,12 @@ export const members: Member[] = [
     steamUrl: "https://steamcommunity.com/id/gustamengogu/",
     bio: "Direto do Rio de Janeiro, Gustavo é a Wikipédia humana do Dota: sabe tudo sobre cada herói, cada item, cada patch e cada meta — mas só usa esse conhecimento para jogar de suporte. Pergunta qualquer coisa sobre o jogo e ele responde antes do Google. No meio da explicação, porém, inevitavelmente vem o clássico: \"Peraí, meu PC travou\". E trava mesmo. Sempre. Na teamfight mais importante, no momento decisivo, o Tomate Cru some da tela enquanto o time chora. A lenda diz que comer um tomate com sal virou o rito de passagem do clã — \"Humm... AaAaAArGH!! AaAaAArGH!!\" — mas até hoje ninguém sabe se o grito foi do tomate ou do PC travando de novo.",
     dotaHours: "15.467",
+  },
+  {
+    name: "mOsh^ s2 JUJUY",
+    avatar: "https://avatars.fastly.steamstatic.com/09b2badd2c8b3beb86d67948e007ee640980b2ad_full.jpg",
+    steamUrl: "https://steamcommunity.com/profiles/76561198836705521/",
+    bio: "Manito directo desde las alturas de Jujuy, Jujuy, Argentina — tierra de la Pepona, el manito oficial del clan PDD. Es muy profesional.",
+    dotaHours: "2.760",
   }
 ];

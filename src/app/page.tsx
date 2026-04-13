@@ -1,11 +1,122 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { members } from "../data/members";
 import AudioPlayer from '../components/AudioPlayer';
 import LoreSection from '../components/LoreSection';
 
+const GAP = 32;
+const CLONE_COUNT = 3;
+
+// Cards com clones nas bordas para efeito infinito
+const clonesBefore = members.slice(-CLONE_COUNT).map((m, i) => ({ ...m, realIndex: members.length - CLONE_COUNT + i }));
+const clonesAfter  = members.slice(0, CLONE_COUNT).map((m, i) => ({ ...m, realIndex: i }));
+const displayMembers = [
+  ...clonesBefore,
+  ...members.map((m, i) => ({ ...m, realIndex: i })),
+  ...clonesAfter,
+];
+
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [slideIndex, setSlideIndex]       = useState(CLONE_COUNT); // começa no primeiro real
+  const [animated, setAnimated]           = useState(true);
+  const [visibleCount, setVisibleCount]   = useState(3);
+  const intervalRef  = useRef<ReturnType<typeof setInterval>>();
+  const isPausedRef  = useRef(false);
+  const dragStartX   = useRef<number | null>(null);
+  const isDragging   = useRef(false);
+  const [dragOffsetX, setDragOffsetX] = useState(0);
+
+  // Responsivo
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 640) setVisibleCount(1);
+      else if (window.innerWidth < 1024) setVisibleCount(2);
+      else setVisibleCount(3);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Re-habilita animação após salto silencioso
+  useEffect(() => {
+    if (!animated) {
+      const t = setTimeout(() => setAnimated(true), 20);
+      return () => clearTimeout(t);
+    }
+  }, [animated]);
+
+  // Autoplay
+  const startInterval = useCallback(() => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      if (!isPausedRef.current) {
+        setAnimated(true);
+        setSlideIndex(i => i + 1);
+      }
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    startInterval();
+    return () => clearInterval(intervalRef.current);
+  }, [startInterval]);
+
+  // Salto silencioso ao chegar nos clones
+  const onTransitionEnd = () => {
+    const len = members.length;
+    if (slideIndex >= CLONE_COUNT + len) {
+      setAnimated(false);
+      setSlideIndex(slideIndex - len);
+    } else if (slideIndex < CLONE_COUNT) {
+      setAnimated(false);
+      setSlideIndex(len + slideIndex);
+    }
+  };
+
+  const scrollCarousel = (dir: "left" | "right") => {
+    setAnimated(true);
+    setSlideIndex(i => i + (dir === "right" ? 1 : -1));
+    startInterval(); // reseta o timer ao clicar
+  };
+
+  const cardWidth  = `calc((100% - ${(visibleCount - 1) * GAP}px) / ${visibleCount})`;
+  const translateX = `calc(-${slideIndex} * (${cardWidth} + ${GAP}px) + ${dragOffsetX}px)`;
+
+  // Drag / swipe
+  const DRAG_THRESHOLD = 50;
+
+  const onDragEnd = useCallback((x: number) => {
+    if (!isDragging.current || dragStartX.current === null) return;
+    const diff = dragStartX.current - x;
+    setDragOffsetX(0);
+    isDragging.current = false;
+    dragStartX.current = null;
+    isPausedRef.current = false;
+    if (Math.abs(diff) > DRAG_THRESHOLD) {
+      scrollCarousel(diff > 0 ? "right" : "left");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollCarousel]);
+
+  const onDragStart = useCallback((x: number) => {
+    dragStartX.current = x;
+    isDragging.current = true;
+    isPausedRef.current = true;
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (dragStartX.current !== null)
+        setDragOffsetX(e.clientX - dragStartX.current);
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      onDragEnd(e.clientX);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+  }, [onDragEnd]);
 
   return (
     <main className="min-h-screen bg-black text-white relative flex flex-col items-center overflow-x-hidden pb-24 md:pb-28">
@@ -36,6 +147,21 @@ export default function Home() {
           >
             Parças Do Dota
           </h2>
+
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-48 left-0 right-0 flex flex-col items-center gap-0 animate-bounce-arrow pointer-events-none">
+          <span className="text-[11px] uppercase tracking-[0.3em] text-gray-500 mb-2 font-[family-name:var(--font-cinzel)]">scroll</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#e81919] -mt-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#e81919]/60 -mt-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
       </section>
 
@@ -49,54 +175,100 @@ export default function Home() {
           <div className="h-1 w-12 bg-gradient-to-l from-transparent to-[#e81919]"></div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {members.map((member, index) => (
+        {/* Carrossel */}
+        <div className="relative w-full">
+
+          {/* Seta esquerda */}
+          <button
+            onClick={() => scrollCarousel("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-12 h-12 rounded-full flex items-center justify-center bg-black/80 border border-white/10 backdrop-blur-md text-white hover:bg-[#e81919]/80 hover:border-[#e81919] hover:scale-110 transition-all duration-300"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+          </button>
+
+          {/* Trilha do carrossel */}
+          <div
+            className="overflow-hidden w-full cursor-grab active:cursor-grabbing select-none"
+            onMouseEnter={() => { isPausedRef.current = true; }}
+            onMouseLeave={() => { isPausedRef.current = false; }}
+            onMouseDown={(e) => onDragStart(e.clientX)}
+            onTouchStart={(e) => onDragStart(e.touches[0].clientX)}
+            onTouchMove={(e) => {
+              if (isDragging.current && dragStartX.current !== null)
+                setDragOffsetX(e.touches[0].clientX - dragStartX.current);
+            }}
+            onTouchEnd={(e) => onDragEnd(e.changedTouches[0].clientX)}
+          >
             <div
-              key={member.name}
-              className="group relative bg-black/40 backdrop-blur-md border border-white/10 p-6 flex flex-col items-center text-center rounded-2xl shadow-xl hover:bg-black/60 hover:border-[#e81919]/60 hover:shadow-[#e81919]/20 transition-all duration-500"
+              className="flex gap-8"
+              style={{
+                transform: `translateX(${translateX})`,
+                transition: animated && dragOffsetX === 0 ? "transform 0.5s ease-in-out" : "none",
+              }}
+              onTransitionEnd={onTransitionEnd}
             >
-              <div className="relative w-40 h-40 mb-6 rounded-full p-1 bg-gradient-to-b from-gray-700 to-black group-hover:from-[#e81919] group-hover:to-orange-600 transition-colors duration-500">
-                <img
-                  src={member.avatar}
-                  alt={member.name}
-                  className="w-full h-full rounded-full border-4 border-black object-cover z-10 relative"
-                />
-                <div className="absolute inset-0 rounded-full shadow-[0_0_20px_rgba(232,25,25,0)] group-hover:shadow-[0_0_30px_rgba(232,25,25,0.6)] transition-shadow duration-500 z-0"></div>
-              </div>
+            {displayMembers.map((member, displayIdx) => (
+              <div
+                key={`${member.realIndex}-${displayIdx}`}
+                style={{ minWidth: cardWidth, maxWidth: cardWidth }}
+                className="group relative bg-black/40 backdrop-blur-md border border-white/10 p-6 flex flex-col items-center text-center rounded-2xl shadow-xl hover:bg-black/60 hover:border-[#e81919]/60 hover:shadow-[#e81919]/20 transition-all duration-500"
+              >
+                <div className="relative w-40 h-40 mb-6 rounded-full p-1 bg-gradient-to-b from-gray-700 to-black group-hover:from-[#e81919] group-hover:to-orange-600 transition-colors duration-500">
+                  <img
+                    src={member.avatar}
+                    alt={member.name}
+                    className="w-full h-full rounded-full border-4 border-black object-cover z-10 relative"
+                  />
+                  <div className="absolute inset-0 rounded-full shadow-[0_0_20px_rgba(232,25,25,0)] group-hover:shadow-[0_0_30px_rgba(232,25,25,0.6)] transition-shadow duration-500 z-0"></div>
+                </div>
 
-              <h3 className="text-lg font-bold mb-2 uppercase min-h-[48px] flex items-center justify-center group-hover:text-[#e81919] transition-colors duration-300 font-[family-name:var(--font-cinzel)]">
-                {member.name}
-              </h3>
+                <h3 className="text-lg font-bold mb-2 uppercase min-h-[48px] flex items-center justify-center group-hover:text-[#e81919] transition-colors duration-300 font-[family-name:var(--font-cinzel)]">
+                  {member.name}
+                </h3>
 
-              <div className="flex items-center gap-2 mb-6 text-sm text-gray-400 bg-black/50 px-3 py-1.5 rounded-full border border-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#e81919]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{member.dotaHours === "Steam Privado" ? "Horas Ocultas" : `${member.dotaHours} Horas`}</span>
-              </div>
+                <div className="flex items-center gap-2 mb-6 text-sm text-gray-400 bg-black/50 px-3 py-1.5 rounded-full border border-gray-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#e81919]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{["Oculto", "Steam Privado"].includes(member.dotaHours) ? "Horas Ocultas" : `${member.dotaHours} Horas`}</span>
+                </div>
 
-              <div className="flex flex-col w-full gap-3 mt-auto">
-                <button
-                  onClick={() => setSelectedIndex(index)}
-                  className="relative overflow-hidden bg-transparent border-2 border-white/30 text-white font-bold py-3 px-4 uppercase rounded-lg hover:border-white transition-all group/btn"
-                >
-                  <span className="relative z-10">Biografia</span>
-                  <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover/btn:scale-x-100 transition-transform duration-300 ease-out z-0"></div>
-                  <span className="absolute inset-0 flex items-center justify-center font-bold text-black opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 z-20">
-                    Biografia
-                  </span>
-                </button>
-                <a
-                  href={member.steamUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-[#e81919] to-red-800 text-white font-bold py-3 px-4 uppercase rounded-lg hover:shadow-[0_0_20px_rgba(232,25,25,0.6)] hover:brightness-110 transition-all"
-                >
-                  Ver na Steam
-                </a>
+                <div className="flex flex-col w-full gap-3 mt-auto">
+                  <button
+                    onClick={() => setSelectedIndex(member.realIndex)}
+                    className="relative overflow-hidden bg-transparent border-2 border-white/30 text-white font-bold py-3 px-4 uppercase rounded-lg hover:border-white transition-all group/btn"
+                  >
+                    <span className="relative z-10">Biografia</span>
+                    <div className="absolute inset-0 w-full h-full bg-white scale-x-0 origin-left group-hover/btn:scale-x-100 transition-transform duration-300 ease-out z-0"></div>
+                    <span className="absolute inset-0 flex items-center justify-center font-bold text-black opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 z-20">
+                      Biografia
+                    </span>
+                  </button>
+                  <a
+                    href={member.steamUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gradient-to-r from-[#e81919] to-red-800 text-white font-bold py-3 px-4 uppercase rounded-lg hover:shadow-[0_0_20px_rgba(232,25,25,0.6)] hover:brightness-110 transition-all"
+                  >
+                    Ver na Steam
+                  </a>
+                </div>
               </div>
+            ))}
             </div>
-          ))}
+          </div>
+
+          {/* Seta direita */}
+          <button
+            onClick={() => scrollCarousel("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-12 h-12 rounded-full flex items-center justify-center bg-black/80 border border-white/10 backdrop-blur-md text-white hover:bg-[#e81919]/80 hover:border-[#e81919] hover:scale-110 transition-all duration-300"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+          </button>
         </div>
       </section>
 
@@ -119,6 +291,12 @@ export default function Home() {
       <footer className="relative z-10 mt-auto py-12 text-center flex flex-col items-center w-full border-t border-white/10 bg-black/30 backdrop-blur-sm">
         <div className="w-24 h-[1px] bg-[#e81919]/50 mb-6"></div>
         <p className="text-gray-400 font-bold uppercase tracking-[0.3em] font-[family-name:var(--font-cinzel)]">Clã PDD – 2026</p>
+        <a
+          href="/sobre"
+          className="mt-4 text-xs text-gray-600 hover:text-[#e81919] uppercase tracking-widest transition-colors font-[family-name:var(--font-cinzel)]"
+        >
+          Estatuto do Clã
+        </a>
       </footer>
 
       {/* Modal Biografia Carousel 3D */}
@@ -178,7 +356,7 @@ export default function Home() {
                   key={member.name}
                   onClick={(e) => { e.stopPropagation(); if (!isCenter) setSelectedIndex(i); }}
                   className={`absolute transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] pointer-events-auto
-                        bg-neutral-900 border ${isCenter ? 'border-[#e81919]/60 shadow-[0_0_50px_rgba(232,25,25,0.3)]' : 'border-gray-800 shadow-xl cursor-pointer'}
+                        bg-neutral-900 border ${isCenter ? 'border-[#e81919]/60 shadow-[0_0_50px_rgba(232,25,25,0.3)]' : 'border-gray-800 shadow-xl cursor-pointer hidden md:flex'}
                         w-[95vw] md:w-[90vw] max-w-[1000px] p-6 md:p-10 rounded-3xl
                         max-h-[85vh] overflow-y-auto hidden-scrollbar
                      `}

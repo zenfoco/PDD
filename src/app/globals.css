@@ -21,3 +21,31 @@ body {
     text-wrap: balance;
   }
 }
+
+@keyframes glitch-in {
+  0%   { opacity: 0; transform: translateX(-6px) skewX(-8deg); filter: blur(3px); }
+  40%  { opacity: 0.8; transform: translateX(3px) skewX(3deg); filter: blur(0); }
+  70%  { transform: translateX(-2px) skewX(-1deg); }
+  100% { opacity: 1; transform: translateX(0) skewX(0); }
+}
+
+.animate-glitch-in {
+  animation: glitch-in 0.45s ease-out forwards;
+}
+
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(10px); opacity: 1; }
+}
+
+.animate-bounce-arrow {
+  animation: bounce-arrow 1.6s ease-in-out infinite;
+}
+
+.hidden-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}

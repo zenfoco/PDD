@@ -2,9 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-const quotes = [
+const CORINGA_TRACK_INDEX = 5; // "Coringa, Cadê a BKB?" na playlist
+
+interface Quote {
+    text: string;
+    author: string;
+    hasAudio?: boolean;
+}
+
+const quotes: Quote[] = [
     { text: "Meu primooo porraa!!", author: "Monstro da Jaula" },
-    { text: "Cadê sua BKB, Coringa?", author: "Geral" },
+    { text: "Cadê sua BKB, Coringa?", author: "Geral", hasAudio: true },
     { text: "Óóó Drogaa!!", author: "Angel" },
     { text: "18 Mil Horas Sem Bota!", author: "Discípulo" },
     { text: "Se eu sair eu perco a torre.", author: "Jaula ignorando gank" },
@@ -13,26 +21,32 @@ const quotes = [
 ];
 
 const pddMeanings = [
-    { text: "Parças Do Dota", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Pau Dentro Direto", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Perde Direito Direto", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Piores Do Dota", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Passando Dor Direto", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Ping Do Demônio", color: "text-white", glow: "rgba(255,255,255,0.6)" },
-    { text: "Porra De Dota", color: "text-white", glow: "rgba(255,255,255,0.6)" }
+    "Parças Do Dota",
+    "Pau Dentro Direto",
+    "Perde Direito Direto",
+    "Piores Do Dota",
+    "Passando Dor Direto",
+    "Ping Do Demônio",
+    "Porra De Dota",
 ];
+
+function playCoringa() {
+    document.dispatchEvent(
+        new CustomEvent("pdd:play-track", { detail: { trackIndex: CORINGA_TRACK_INDEX } })
+    );
+}
 
 export default function LoreSection() {
     const [meaningIndex, setMeaningIndex] = useState(0);
+    const [glitchKey, setGlitchKey] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setMeaningIndex(prev => (prev + 1) % pddMeanings.length);
+            setMeaningIndex((prev) => (prev + 1) % pddMeanings.length);
+            setGlitchKey((k) => k + 1);
         }, 3500);
         return () => clearInterval(interval);
     }, []);
-
-    const currentMeaning = pddMeanings[meaningIndex];
 
     return (
         <section className="w-full max-w-[1400px] mx-auto py-24 px-4 flex flex-col items-center gap-16 relative z-10 border-t border-red-900/40 mt-16 bg-gradient-to-b from-black/20 to-black/80 backdrop-blur-md rounded-[3rem] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
@@ -44,16 +58,19 @@ export default function LoreSection() {
                 </h2>
 
                 <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-                    Você achou que a sigla <strong className="text-white font-black px-2 py-1 bg-white/10 rounded">PDD</strong> significava apenas algo amigável?
+                    Você achou que a sigla{" "}
+                    <strong className="text-white font-black px-2 py-1 bg-white/10 rounded">PDD</strong>{" "}
+                    significava apenas algo amigável?
                     Ela possui diversas traduções milenares conhecidas nas madrugadas:
                 </p>
 
                 <div className="h-24 md:h-28 flex items-center justify-center p-4">
                     <h3
-                        className={`text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-widest transition-all duration-700 transform scale-100 ${currentMeaning.color}`}
-                        style={{ textShadow: `0 0 40px ${currentMeaning.glow}` }}
+                        key={glitchKey}
+                        className="animate-glitch-in text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-widest text-white"
+                        style={{ textShadow: "0 0 40px rgba(232,25,25,0.7), 0 0 80px rgba(232,25,25,0.3)" }}
                     >
-                        {currentMeaning.text}
+                        {pddMeanings[meaningIndex]}
                     </h3>
                 </div>
             </div>
@@ -65,25 +82,47 @@ export default function LoreSection() {
                     Mural de Pérolas (Hall of Fame)
                     <span className="w-8 h-[2px] bg-red-600 ml-4"></span>
                 </h3>
+
                 <div className="flex flex-wrap justify-center gap-6 px-4 md:px-12 w-full">
                     {quotes.map((q, i) => (
                         <div
                             key={i}
                             className="bg-gradient-to-br from-black/90 to-red-950/40 p-8 rounded-2xl border border-red-900/30 hover:border-[#e81919]/60 transition-all duration-300 hover:-translate-y-2 group shadow-2xl relative overflow-hidden flex-1 min-w-[300px] max-w-sm"
                         >
+                            {/* Aspas decorativas de fundo */}
                             <div className="absolute -right-8 -top-8 text-white/5 group-hover:text-[#e81919]/10 transition-colors duration-500 scale-150 rotate-12">
-                                <svg fill="currentColor" viewBox="0 0 24 24" className="w-48 h-48"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+                                <svg fill="currentColor" viewBox="0 0 24 24" className="w-48 h-48">
+                                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                                </svg>
                             </div>
 
+                            {/* Aspas pequenas */}
                             <svg className="w-10 h-10 text-[#e81919]/50 mb-6 group-hover:text-[#e81919] transition-colors relative z-10" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                             </svg>
+
                             <p className="text-xl md:text-2xl font-bold text-gray-200 mb-6 italic relative z-10 font-[family-name:var(--font-cinzel)] tracking-wide">
                                 &quot;{q.text}&quot;
                             </p>
-                            <p className="text-xs text-[#e81919] font-black uppercase tracking-widest relative z-10">
-                                — {q.author}
-                            </p>
+
+                            <div className="flex items-center justify-between relative z-10">
+                                <p className="text-xs text-[#e81919] font-black uppercase tracking-widest">
+                                    — {q.author}
+                                </p>
+
+                                {q.hasAudio && (
+                                    <button
+                                        onClick={playCoringa}
+                                        title="Ouvir no Rádio PDD"
+                                        className="flex items-center gap-1.5 text-[10px] text-gray-500 hover:text-[#e81919] uppercase tracking-widest transition-colors group/btn"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover/btn:scale-125 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                                        </svg>
+                                        <span className="hidden sm:inline">Ouvir</span>
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>

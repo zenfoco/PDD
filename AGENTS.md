@@ -1,65 +1,37 @@
-# AGENTS.md - Synkra AIOS (Codex CLI)
+# AGENTS.md — PDD
 
-Este arquivo define as instrucoes do projeto para o Codex CLI.
+Fan site do clã Parças Do Dota (PDD).
 
-<!-- AIOS-MANAGED-START: core -->
-## Core Rules
+## Memória do projeto
 
-1. Siga a Constitution em `.aios-core/constitution.md`
-2. Priorize `CLI First -> Observability Second -> UI Third`
-3. Trabalhe por stories em `docs/stories/`
-4. Nao invente requisitos fora dos artefatos existentes
-<!-- AIOS-MANAGED-END: core -->
+O PDD usa um sistema de três camadas:
 
-<!-- AIOS-MANAGED-START: quality -->
-## Quality Gates
+1. **Código** — `/home/zenfoco/projects/own/pdd`
+   - fonte da verdade para o comportamento real
+2. **Stories** — `docs/stories/`
+   - histórico de desenvolvimento e critérios de aceite
+3. **Cofre** — `/home/zenfoco/projects/cofre/PDD/PDD`
+   - sessões, decisões, estado atual, perguntas abertas
 
-- Rode `npm run lint`
-- Rode `npm run typecheck`
-- Rode `npm test`
-- Atualize checklist e file list da story antes de concluir
-<!-- AIOS-MANAGED-END: quality -->
+Antes de qualquer trabalho relevante, consultar:
+- `docs/stories/` para entender o que foi feito e o que está pendente
+- o cofre para contexto acumulado
 
-<!-- AIOS-MANAGED-START: codebase -->
-## Project Map
+## Stack
 
-- Core framework: `.aios-core/`
-- CLI entrypoints: `bin/`
-- Shared packages: `packages/`
-- Tests: `tests/`
-- Docs: `docs/`
-<!-- AIOS-MANAGED-END: codebase -->
+- Next.js 14+ (App Router), TypeScript, Tailwind CSS
+- Sem banco de dados — dados estáticos
+- Mídia em `public/media/`
 
-<!-- AIOS-MANAGED-START: commands -->
-## Common Commands
+## Comandos
 
-- `npm run sync:ide`
-- `npm run sync:ide:check`
-- `npm run sync:skills:codex`
-- `npm run sync:skills:codex:global` (opcional; neste repo o padrao e local-first)
-- `npm run validate:structure`
-- `npm run validate:agents`
-<!-- AIOS-MANAGED-END: commands -->
+- `npm run dev` — servidor de desenvolvimento
+- `npm run lint` — linting
+- `npm run build` — build de produção
 
-<!-- AIOS-MANAGED-START: shortcuts -->
-## Agent Shortcuts
+## Regras
 
-Preferencia de ativacao no Codex CLI:
-1. Use `/skills` e selecione `aios-<agent-id>` vindo de `.codex/skills` (ex.: `aios-architect`)
-2. Se preferir, use os atalhos abaixo (`@architect`, `/architect`, etc.)
-
-Interprete os atalhos abaixo carregando o arquivo correspondente em `.aios-core/development/agents/` (fallback: `.codex/agents/`), renderize o greeting via `generate-greeting.js` e assuma a persona ate `*exit`:
-
-- `@architect`, `/architect`, `/architect.md` -> `.aios-core/development/agents/architect.md`
-- `@dev`, `/dev`, `/dev.md` -> `.aios-core/development/agents/dev.md`
-- `@qa`, `/qa`, `/qa.md` -> `.aios-core/development/agents/qa.md`
-- `@pm`, `/pm`, `/pm.md` -> `.aios-core/development/agents/pm.md`
-- `@po`, `/po`, `/po.md` -> `.aios-core/development/agents/po.md`
-- `@sm`, `/sm`, `/sm.md` -> `.aios-core/development/agents/sm.md`
-- `@analyst`, `/analyst`, `/analyst.md` -> `.aios-core/development/agents/analyst.md`
-- `@devops`, `/devops`, `/devops.md` -> `.aios-core/development/agents/devops.md`
-- `@data-engineer`, `/data-engineer`, `/data-engineer.md` -> `.aios-core/development/agents/data-engineer.md`
-- `@ux-design-expert`, `/ux-design-expert`, `/ux-design-expert.md` -> `.aios-core/development/agents/ux-design-expert.md`
-- `@squad-creator`, `/squad-creator`, `/squad-creator.md` -> `.aios-core/development/agents/squad-creator.md`
-- `@aios-master`, `/aios-master`, `/aios-master.md` -> `.aios-core/development/agents/aios-master.md`
-<!-- AIOS-MANAGED-END: shortcuts -->
+- NUNCA commit/push sem ordem explícita do usuário
+- NUNCA adicionar features além do pedido
+- Priorizar simplicidade — é um site de hobby
+- Cada entrega deve funcionar — não deixar código quebrado

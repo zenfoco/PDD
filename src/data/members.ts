@@ -90,5 +90,12 @@ export const members: Member[] = [
     steamUrl: "https://steamcommunity.com/profiles/76561198836705521/",
     bio: "Manito directo desde las alturas de Jujuy, Jujuy, Argentina — tierra de la Pepona, el manito oficial del clan PDD. Es muy profesional.",
     dotaHours: "2.760",
+  },
+  {
+    name: "꧁ঔৣ☬SABOR SAZON☬",
+    avatar: "https://avatars.fastly.steamstatic.com/85483f219f689088881a96383c592b1d2b662546_full.jpg",
+    steamUrl: "https://steamcommunity.com/id/324235235/",
+    bio: "O novo tempero do clã PDD. Com 5.704 horas de Dota 2 nas panelas e um nick que cheira a glutamato monossódico, SABOR SAZON chegou do Brasil para dar aquele gosto especial nas partidas. Ainda não sabemos se ele tempera o jogo ou estraga a receita — mas uma coisa é certa: ninguém sai sem sentir o sabor.",
+    dotaHours: "5.704",
   }
 ];
